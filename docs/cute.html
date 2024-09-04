@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Message</title>
+    <style>
+        /* Base styles for the entire page */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Styles for the message section */
+        .message-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-color: #f8bbd0; /* Light pink background */
+        }
+
+        .message-box {
+            background-color: #ffe0e6; /* Lighter pink for the message box */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .message-box h1 {
+            font-size: 2rem;
+            color: #d81b60; /* Darker pink for emphasis */
+        }
+
+        .message-box p {
+            font-size: 1.2rem;
+            color: #880e4f; /* Darker shade of pink */
+            margin: 20px 0;
+        }
+
+        .message-box .next-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #d81b60; /* Button color matching text */
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .message-box .next-button:hover {
+            background-color: #c2185b; /* Slightly darker shade on hover */
+        }
+
+        /* Styles for the wait section */
+        .wait-section {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-color: #f8bbd0; /* Light pink background */
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .wait-message {
+            font-size: 2rem;
+            color: #d81b60; /* Darker pink for emphasis */
+            margin-bottom: 20px;
+        }
+
+        .wait-section .next-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #d81b60; /* Button color matching text */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px; /* Space between message and button */
+        }
+
+        .wait-section .next-button:hover {
+            background-color: #c2185b; /* Slightly darker shade on hover */
+        }
+
+        /* Styles for the video section */
+        .video-section {
+            display: none;
+            position: fixed; /* Fixed position to cover entire viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black; /* Ensure background is black for fullscreen */
+        }
+
+        .video-section video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <!-- Message Section -->
+    <div class="message-section" id="message-section">
+        <div class="message-box">
+            <h1>I am proud of ya, my baby (づ￣ 3￣)づ</h1>
+            <p>You always do your best and I want you to know, as long as I am alive, you'll always be loved, coz this idiot will love you forever &lt;3</p>
+            <a href="#" class="next-button" id="next-button">Next</a>
+        </div>
+    </div>
+
+    <!-- Wait Section -->
+    <div class="wait-section" id="wait-section">
+        <div class="wait-message">
+            Wait, Sweetheart ヾ(＠⌒ー⌒＠)ノ
+        </div>
+        <button id="next-wait-button" class="next-button">Next</button>
+    </div>
+
+    <!-- Video Section -->
+    <div class="video-section" id="video-section">
+        <video id="video" src="my girl.mp4" autoplay playsinline></video>
+    </div>
+
+    <script>
+        // JavaScript to handle transitions and fullscreen video
+        document.addEventListener('DOMContentLoaded', () => {
+            const messageSection = document.getElementById('message-section');
+            const waitSection = document.getElementById('wait-section');
+            const videoSection = document.getElementById('video-section');
+            const video = document.getElementById('video');
+            const nextButton = document.getElementById('next-button');
+            const nextWaitButton = document.getElementById('next-wait-button');
+
+            // Show the wait section after clicking "Next"
+            nextButton.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default anchor behavior
+                messageSection.style.display = 'none';
+                waitSection.style.display = 'flex';
+                setTimeout(() => {
+                    nextWaitButton.classList.remove('hidden');
+                }, 3000); // Show the button after 3 seconds
+            });
+
+            // Show the video section when "Next" is clicked on the wait page
+            nextWaitButton.addEventListener('click', () => {
+                waitSection.style.display = 'none';
+                videoSection.style.display = 'block';
+                video.play(); // Ensure the video is playing
+
+                // Request fullscreen on the video element
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) { /* Safari */
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) { /* IE11 */
+                    video.msRequestFullscreen();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
